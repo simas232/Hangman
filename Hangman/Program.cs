@@ -11,17 +11,17 @@ namespace Hangman
         {
             //Load the file with random words from the same directory as Program.cs file
             string[] wordArray = System.IO.File.ReadAllText(path: AppDomain.CurrentDomain.BaseDirectory + "../../../words.txt").Split(',');
-            
+
             Random rnd = new Random();
             string secretWord = wordArray[rnd.Next(0, wordArray.Length)];
             char[] printedWord = Enumerable.Repeat('_', secretWord.Length).ToArray();
-            
+
             StringBuilder incorrectLetters = new StringBuilder();
             string userGuess;
             int guessesLeft = 10;
             do
             {
-                Output.DisplayMainScreen(printedWord);   
+                Output.DisplayMainScreen(printedWord);
 
                 //Perhaps a strange place to check for a game win, but it allows to show up nicely with revealed word in refreshed console
                 if (Misc.CheckForGameWin(printedWord))
@@ -31,7 +31,7 @@ namespace Hangman
 
                 Output.PrintTextInColor($"Guesses Left: {guessesLeft}", ConsoleColor.Green, true);
                 Output.PrintTextInColor($"Guessed Letters: {incorrectLetters}", ConsoleColor.Green, true);
-                
+
                 userGuess = Input.AskForStringInput("Enter Your Guess (letter or word): ");
 
                 if (userGuess.Length == 1)
@@ -53,7 +53,7 @@ namespace Hangman
                     else if (incorrectLetters.ToString().Contains(userGuess))
                     {
                         continue;//This letter was used in previous guesses, so it should not be counted as another guess
-                    } 
+                    }
                     else
                     {
                         incorrectLetters.Append(userGuess);
