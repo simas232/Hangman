@@ -36,7 +36,11 @@ namespace Hangman
 
                 if (userGuess.Length == 1)
                 {
-                    if (secretWord.Contains(userGuess))
+                    if (string.Join("", printedWord).Contains(userGuess))
+                    {
+                        continue;
+                    }
+                    else if (secretWord.Contains(userGuess))
                     {
                         for (int index = 0; index < secretWord.Length; index++)
                         {
@@ -49,7 +53,7 @@ namespace Hangman
                     else if (incorrectLetters.ToString().Contains(userGuess))
                     {
                         continue;//This letter was used in previous guesses, so it should not be counted as another guess
-                    }
+                    } 
                     else
                     {
                         incorrectLetters.Append(userGuess);
